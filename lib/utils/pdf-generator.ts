@@ -6,8 +6,8 @@ export const generatePurchaseOrderPDF = (order: PurchaseOrder) => {
   const doc = new jsPDF();
 
   // Corporate colors
-  const primaryBlue = [30, 58, 111]; // #1e3a6f
-  const secondaryGreen = [124, 179, 66]; // #7cb342
+  const primaryBlue: [number, number, number] = [30, 58, 111]; // #1e3a6f
+  const secondaryGreen: [number, number, number] = [124, 179, 66]; // #7cb342
 
   // Header - Company name
   doc.setFillColor(primaryBlue[0], primaryBlue[1], primaryBlue[2]);
@@ -80,20 +80,15 @@ export const generatePurchaseOrderPDF = (order: PurchaseOrder) => {
     yPos += 5;
   }
 
-  if (order.shipping_address) {
-    doc.text(`Dirección de Envío: ${order.shipping_address}`, 15, yPos);
-    yPos += 5;
-  }
-
   // Items table
   yPos += 5;
   const tableData = order.purchase_order_items.map((item) => [
-    item.product?.code || '-',
-    item.product?.name || '-',
+    item.products?.code || '-',
+    item.products?.name || '-',
     item.quantity.toFixed(2),
-    item.product?.purchase_unit || '-',
+    item.products?.unit_measure || '-',
     `$${item.unit_price.toFixed(2)}`,
-    `$${item.total_price.toFixed(2)}`,
+    `$${item.total.toFixed(2)}`,
   ]);
 
   autoTable(doc, {
@@ -127,28 +122,30 @@ export const generatePurchaseOrderPDF = (order: PurchaseOrder) => {
   const totalsY = finalY + 10;
   doc.setFontSize(10);
 
-  const subtotal = order.total_amount - (order.tax_amount || 0);
+  const subtotal = (order.subtotal || 0);
+  const taxAmount = (order.tax_amount || 0);
+  const totalAmount = (order.total_amount || subtotal + taxAmount);
 
   doc.text('Subtotal:', 140, totalsY);
   doc.text(`$${subtotal.toFixed(2)}`, 195, totalsY, { align: 'right' });
 
-  if (order.tax_amount && order.tax_amount > 0) {
+  if (taxAmount > 0) {
     doc.text('IVA:', 140, totalsY + 5);
-    doc.text(`$${order.tax_amount.toFixed(2)}`, 195, totalsY + 5, { align: 'right' });
+    doc.text(`$${taxAmount.toFixed(2)}`, 195, totalsY + 5, { align: 'right' });
   }
 
   doc.setFontSize(12);
-  doc.setFont(undefined, 'bold');
+  doc.setFont('helvetica', 'bold');
   doc.text('Total:', 140, totalsY + 10);
-  doc.text(`$${order.total_amount.toFixed(2)}`, 195, totalsY + 10, { align: 'right' });
+  doc.text(`$${totalAmount.toFixed(2)}`, 195, totalsY + 10, { align: 'right' });
 
   // Notes
   if (order.notes) {
     const notesY = totalsY + 20;
     doc.setFontSize(10);
-    doc.setFont(undefined, 'bold');
+    doc.setFont('helvetica', 'bold');
     doc.text('Notas:', 15, notesY);
-    doc.setFont(undefined, 'normal');
+    doc.setFont('helvetica', 'normal');
 
     const splitNotes = doc.splitTextToSize(order.notes, 180);
     doc.text(splitNotes, 15, notesY + 5);

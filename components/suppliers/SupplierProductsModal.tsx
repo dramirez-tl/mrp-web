@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { XMarkIcon, PlusIcon, TrashIcon } from '@heroicons/react/24/outline';
-import { Supplier, SupplierProduct, AddSupplierProductRequest } from '@/lib/types/suppliers';
+import { Supplier, SupplierProduct, AddSupplierProductRequest, Currency } from '@/lib/types/suppliers';
 import { Product } from '@/lib/types/products';
 import suppliersService from '@/lib/services/suppliers.service';
 import productsService from '@/lib/services/products.service';
@@ -28,7 +28,7 @@ const SupplierProductsModal: React.FC<SupplierProductsModalProps> = ({
     supplier_sku: '',
     supplier_description: '',
     unit_price: 0,
-    currency: 'MXN',
+    currency: Currency.MXN,
     lead_time_days: 0,
     min_order_qty: 0,
     order_multiple: undefined,
@@ -64,12 +64,19 @@ const SupplierProductsModal: React.FC<SupplierProductsModalProps> = ({
           const product = allProducts.find(p => p.id === sp.product_id);
           return {
             ...sp,
-            product: product || null
+            product: product ? {
+              id: product.id,
+              code: product.code,
+              name: product.name,
+              type: product.type,
+              unit_measure: product.unit_measure,
+              category: product.category
+            } : undefined
           };
         });
 
         console.log('✅ Productos enriquecidos con datos:', enrichedProducts);
-        setSupplierProducts(enrichedProducts);
+        setSupplierProducts(enrichedProducts as SupplierProduct[]);
       } else {
         console.log('✅ Backend envía relación product correctamente');
         setSupplierProducts(products);
@@ -133,7 +140,7 @@ const SupplierProductsModal: React.FC<SupplierProductsModalProps> = ({
         supplier_sku: '',
         supplier_description: '',
         unit_price: 0,
-        currency: 'MXN',
+        currency: Currency.MXN,
         lead_time_days: 0,
         min_order_qty: 0,
         order_multiple: undefined,
@@ -377,7 +384,7 @@ const SupplierProductsModal: React.FC<SupplierProductsModalProps> = ({
                         supplier_sku: '',
                         supplier_description: '',
                         unit_price: 0,
-                        currency: 'MXN',
+                        currency: Currency.MXN,
                         lead_time_days: 0,
                         min_order_qty: 0,
                         order_multiple: undefined,
