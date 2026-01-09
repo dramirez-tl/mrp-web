@@ -239,17 +239,17 @@ export default function InventoryPage() {
   const getStockStatusColor = (status: StockStatus) => {
     switch (status) {
       case StockStatus.OUT_OF_STOCK:
-        return 'text-red-600';
+        return 'text-red-600 dark:text-red-400';
       case StockStatus.CRITICAL:
-        return 'text-orange-600';
+        return 'text-orange-600 dark:text-orange-400';
       case StockStatus.LOW:
-        return 'text-yellow-600';
+        return 'text-yellow-600 dark:text-yellow-400';
       case StockStatus.NORMAL:
-        return 'text-green-600';
+        return 'text-green-600 dark:text-green-400';
       case StockStatus.OVERSTOCK:
-        return 'text-blue-600';
+        return 'text-blue-600 dark:text-blue-400';
       default:
-        return 'text-gray-600';
+        return 'text-gray-600 dark:text-gray-400';
     }
   };
 
@@ -261,23 +261,23 @@ export default function InventoryPage() {
           <div>
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-3">
-                <BuildingOfficeIcon className="h-8 w-8 text-gray-600" />
+                <BuildingOfficeIcon className="h-8 w-8 text-gray-600 dark:text-gray-400" />
                 <div>
-                  <h1 className="text-2xl font-bold text-gray-800">Control de Inventario</h1>
-                  <p className="text-gray-600">Gestiona el stock y movimientos de productos</p>
+                  <h1 className="text-2xl font-bold text-gray-800 dark:text-white">Control de Inventario</h1>
+                  <p className="text-gray-600 dark:text-gray-400">Gestiona el stock y movimientos de productos</p>
                 </div>
               </div>
               <div className="flex items-center gap-2">
                 <button
                   onClick={handleCreateMovement}
-                  className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 flex items-center gap-2"
+                  className="px-4 py-2 bg-blue-600 dark:bg-blue-500 text-white rounded-lg hover:bg-blue-700 dark:hover:bg-blue-600 flex items-center gap-2 transition-colors"
                 >
                   <ArrowsRightLeftIcon className="h-4 w-4" />
                   Nuevo Movimiento
                 </button>
                 <button
                   onClick={handleCreateAdjustment}
-                  className="px-4 py-2 bg-orange-600 text-white rounded-lg hover:bg-orange-700 flex items-center gap-2"
+                  className="px-4 py-2 bg-orange-600 dark:bg-orange-500 text-white rounded-lg hover:bg-orange-700 dark:hover:bg-orange-600 flex items-center gap-2 transition-colors"
                 >
                   <PlusIcon className="h-4 w-4" />
                   Ajuste de Inventario
@@ -288,148 +288,148 @@ export default function InventoryPage() {
 
           {/* Estadísticas */}
           <div className="grid grid-cols-1 md:grid-cols-6 gap-4">
-        <div className="bg-white p-4 rounded-lg border border-gray-200">
-          <div className="flex items-center justify-between">
-            <div>
-              <p className="text-gray-500 text-sm">Productos</p>
-              <p className="text-2xl font-bold text-gray-800">{stats.totalProducts}</p>
+            <div className="bg-white dark:bg-gray-800 p-4 rounded-lg border border-gray-200 dark:border-gray-700 transition-colors">
+              <div className="flex items-center justify-between">
+                <div>
+                  <p className="text-gray-500 dark:text-gray-400 text-sm">Productos</p>
+                  <p className="text-2xl font-bold text-gray-800 dark:text-white">{stats.totalProducts}</p>
+                </div>
+                <CubeIcon className="h-8 w-8 text-blue-400 dark:text-blue-500" />
+              </div>
             </div>
-            <CubeIcon className="h-8 w-8 text-blue-400" />
-          </div>
-        </div>
 
-        <div className="bg-white p-4 rounded-lg border border-gray-200">
-          <div className="flex items-center justify-between">
-            <div>
-              <p className="text-gray-500 text-sm">Valor Total</p>
-              <p className="text-lg font-bold text-green-600">
-                {formatCurrency(stats.totalValue)}
-              </p>
+            <div className="bg-white dark:bg-gray-800 p-4 rounded-lg border border-gray-200 dark:border-gray-700 transition-colors">
+              <div className="flex items-center justify-between">
+                <div>
+                  <p className="text-gray-500 dark:text-gray-400 text-sm">Valor Total</p>
+                  <p className="text-lg font-bold text-green-600 dark:text-green-400">
+                    {formatCurrency(stats.totalValue)}
+                  </p>
+                </div>
+                <CurrencyDollarIcon className="h-8 w-8 text-green-400 dark:text-green-500" />
+              </div>
             </div>
-            <CurrencyDollarIcon className="h-8 w-8 text-green-400" />
-          </div>
-        </div>
 
-        <div className="bg-white p-4 rounded-lg border border-gray-200">
-          <div className="flex items-center justify-between">
-            <div>
-              <p className="text-gray-500 text-sm">Stock Bajo</p>
-              <p className="text-2xl font-bold text-yellow-600">{stats.lowStockItems}</p>
+            <div className="bg-white dark:bg-gray-800 p-4 rounded-lg border border-gray-200 dark:border-gray-700 transition-colors">
+              <div className="flex items-center justify-between">
+                <div>
+                  <p className="text-gray-500 dark:text-gray-400 text-sm">Stock Bajo</p>
+                  <p className="text-2xl font-bold text-yellow-600 dark:text-yellow-400">{stats.lowStockItems}</p>
+                </div>
+                <ArrowTrendingDownIcon className="h-8 w-8 text-yellow-400 dark:text-yellow-500" />
+              </div>
             </div>
-            <ArrowTrendingDownIcon className="h-8 w-8 text-yellow-400" />
-          </div>
-        </div>
 
-        <div className="bg-white p-4 rounded-lg border border-gray-200">
-          <div className="flex items-center justify-between">
-            <div>
-              <p className="text-gray-500 text-sm">Críticos</p>
-              <p className="text-2xl font-bold text-red-600">{stats.criticalItems}</p>
+            <div className="bg-white dark:bg-gray-800 p-4 rounded-lg border border-gray-200 dark:border-gray-700 transition-colors">
+              <div className="flex items-center justify-between">
+                <div>
+                  <p className="text-gray-500 dark:text-gray-400 text-sm">Críticos</p>
+                  <p className="text-2xl font-bold text-red-600 dark:text-red-400">{stats.criticalItems}</p>
+                </div>
+                <ExclamationTriangleIcon className="h-8 w-8 text-red-400 dark:text-red-500" />
+              </div>
             </div>
-            <ExclamationTriangleIcon className="h-8 w-8 text-red-400" />
-          </div>
-        </div>
 
-        <div className="bg-white p-4 rounded-lg border border-gray-200">
-          <div className="flex items-center justify-between">
-            <div>
-              <p className="text-gray-500 text-sm">Sobrestock</p>
-              <p className="text-2xl font-bold text-blue-600">{stats.overstockItems}</p>
+            <div className="bg-white dark:bg-gray-800 p-4 rounded-lg border border-gray-200 dark:border-gray-700 transition-colors">
+              <div className="flex items-center justify-between">
+                <div>
+                  <p className="text-gray-500 dark:text-gray-400 text-sm">Sobrestock</p>
+                  <p className="text-2xl font-bold text-blue-600 dark:text-blue-400">{stats.overstockItems}</p>
+                </div>
+                <ArrowTrendingUpIcon className="h-8 w-8 text-blue-400 dark:text-blue-500" />
+              </div>
             </div>
-            <ArrowTrendingUpIcon className="h-8 w-8 text-blue-400" />
-          </div>
-        </div>
 
-        <div className="bg-white p-4 rounded-lg border border-gray-200">
-          <div className="flex items-center justify-between">
-            <div>
-              <p className="text-gray-500 text-sm">Movimientos Hoy</p>
-              <p className="text-2xl font-bold text-purple-600">{stats.totalMovements}</p>
+            <div className="bg-white dark:bg-gray-800 p-4 rounded-lg border border-gray-200 dark:border-gray-700 transition-colors">
+              <div className="flex items-center justify-between">
+                <div>
+                  <p className="text-gray-500 dark:text-gray-400 text-sm">Movimientos Hoy</p>
+                  <p className="text-2xl font-bold text-purple-600 dark:text-purple-400">{stats.totalMovements}</p>
+                </div>
+                <ClockIcon className="h-8 w-8 text-purple-400 dark:text-purple-500" />
+              </div>
             </div>
-            <ClockIcon className="h-8 w-8 text-purple-400" />
-          </div>
-        </div>
           </div>
 
           {/* Tabs */}
-          <div className="border-b border-gray-200">
-        <nav className="-mb-px flex space-x-8">
-          <button
-            onClick={() => handleTabChange('current')}
-            className={`py-2 px-1 border-b-2 font-medium text-sm ${
-              activeTab === 'current'
-                ? 'border-blue-500 text-blue-600'
-                : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'
-            }`}
-          >
-            Inventario Actual
-          </button>
-          <button
-            onClick={() => handleTabChange('movements')}
-            className={`py-2 px-1 border-b-2 font-medium text-sm ${
-              activeTab === 'movements'
-                ? 'border-blue-500 text-blue-600'
-                : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'
-            }`}
-          >
-            Movimientos Recientes
-          </button>
-          <button
-            onClick={() => handleTabChange('low-stock')}
-            className={`py-2 px-1 border-b-2 font-medium text-sm ${
-              activeTab === 'low-stock'
-                ? 'border-blue-500 text-blue-600'
-                : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'
-            }`}
-          >
-            Stock Bajo
-          </button>
-          <button
-            onClick={() => handleTabChange('valuation')}
-            className={`py-2 px-1 border-b-2 font-medium text-sm ${
-              activeTab === 'valuation'
-                ? 'border-blue-500 text-blue-600'
-                : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'
-            }`}
-          >
-            Valorización
-          </button>
-        </nav>
+          <div className="border-b border-gray-200 dark:border-gray-700">
+            <nav className="-mb-px flex space-x-8">
+              <button
+                onClick={() => handleTabChange('current')}
+                className={`py-2 px-1 border-b-2 font-medium text-sm transition-colors ${
+                  activeTab === 'current'
+                    ? 'border-blue-500 text-blue-600 dark:text-blue-400'
+                    : 'border-transparent text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200 hover:border-gray-300 dark:hover:border-gray-600'
+                }`}
+              >
+                Inventario Actual
+              </button>
+              <button
+                onClick={() => handleTabChange('movements')}
+                className={`py-2 px-1 border-b-2 font-medium text-sm transition-colors ${
+                  activeTab === 'movements'
+                    ? 'border-blue-500 text-blue-600 dark:text-blue-400'
+                    : 'border-transparent text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200 hover:border-gray-300 dark:hover:border-gray-600'
+                }`}
+              >
+                Movimientos Recientes
+              </button>
+              <button
+                onClick={() => handleTabChange('low-stock')}
+                className={`py-2 px-1 border-b-2 font-medium text-sm transition-colors ${
+                  activeTab === 'low-stock'
+                    ? 'border-blue-500 text-blue-600 dark:text-blue-400'
+                    : 'border-transparent text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200 hover:border-gray-300 dark:hover:border-gray-600'
+                }`}
+              >
+                Stock Bajo
+              </button>
+              <button
+                onClick={() => handleTabChange('valuation')}
+                className={`py-2 px-1 border-b-2 font-medium text-sm transition-colors ${
+                  activeTab === 'valuation'
+                    ? 'border-blue-500 text-blue-600 dark:text-blue-400'
+                    : 'border-transparent text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200 hover:border-gray-300 dark:hover:border-gray-600'
+                }`}
+              >
+                Valorización
+              </button>
+            </nav>
           </div>
 
           {/* Search and Filters */}
           {activeTab === 'current' && (
             <div className="flex items-center justify-between">
-          <div className="flex items-center gap-4">
-            <div className="relative">
-              <MagnifyingGlassIcon className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-gray-400" />
-              <input
-                type="text"
-                value={searchTerm}
-                onChange={(e) => setSearchTerm(e.target.value)}
-                placeholder="Buscar producto o ubicación..."
-                className="pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 w-80"
-              />
-            </div>
-            <label className="flex items-center gap-2">
-              <input
-                type="checkbox"
-                checked={showZeroStock}
-                onChange={(e) => {
-                  setShowZeroStock(e.target.checked);
-                  fetchInventory();
-                }}
-                className="rounded text-blue-600"
-              />
-              <span className="text-sm text-gray-600">Mostrar stock cero</span>
-            </label>
-          </div>
-          <button
-            onClick={fetchInventory}
-            className="px-3 py-2 text-gray-600 hover:text-gray-800 flex items-center gap-2"
-          >
-            <ArrowPathIcon className="h-4 w-4" />
-            Actualizar
+              <div className="flex items-center gap-4">
+                <div className="relative">
+                  <MagnifyingGlassIcon className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-gray-400 dark:text-gray-500" />
+                  <input
+                    type="text"
+                    value={searchTerm}
+                    onChange={(e) => setSearchTerm(e.target.value)}
+                    placeholder="Buscar producto o ubicación..."
+                    className="pl-10 pr-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-gray-500 focus:ring-2 focus:ring-blue-500 dark:focus:ring-blue-400 w-80 transition-colors"
+                  />
+                </div>
+                <label className="flex items-center gap-2">
+                  <input
+                    type="checkbox"
+                    checked={showZeroStock}
+                    onChange={(e) => {
+                      setShowZeroStock(e.target.checked);
+                      fetchInventory();
+                    }}
+                    className="rounded text-blue-600 dark:text-blue-400 border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 transition-colors"
+                  />
+                  <span className="text-sm text-gray-600 dark:text-gray-300">Mostrar stock cero</span>
+                </label>
+              </div>
+              <button
+                onClick={fetchInventory}
+                className="px-3 py-2 text-gray-600 dark:text-gray-300 hover:text-gray-800 dark:hover:text-white flex items-center gap-2 transition-colors"
+              >
+                <ArrowPathIcon className="h-4 w-4" />
+                Actualizar
               </button>
             </div>
           )}
@@ -437,7 +437,7 @@ export default function InventoryPage() {
           {/* Content */}
           {loading ? (
             <div className="flex justify-center items-center h-64">
-              <ArrowPathIcon className="h-8 w-8 text-gray-400 animate-spin" />
+              <ArrowPathIcon className="h-8 w-8 text-gray-400 dark:text-gray-500 animate-spin" />
             </div>
           ) : (
             <>
@@ -451,58 +451,58 @@ export default function InventoryPage() {
               )}
 
               {activeTab === 'movements' && (
-                <div className="bg-white rounded-lg shadow-sm border border-gray-200">
+                <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm dark:shadow-gray-900/50 border border-gray-200 dark:border-gray-700 transition-colors">
                   <div className="overflow-x-auto">
-                    <table className="min-w-full divide-y divide-gray-200">
-                      <thead className="bg-gray-50">
+                    <table className="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
+                      <thead className="bg-gray-50 dark:bg-gray-700/50">
                         <tr>
-                          <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">
+                          <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase">
                             Fecha
                           </th>
-                          <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">
+                          <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase">
                             Tipo
                           </th>
-                          <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">
+                          <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase">
                             Producto
                           </th>
-                          <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">
+                          <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase">
                             Cantidad
                           </th>
-                          <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">
+                          <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase">
                             Origen
                           </th>
-                          <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">
+                          <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase">
                             Destino
                           </th>
-                          <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">
+                          <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase">
                             Usuario
                           </th>
                         </tr>
                       </thead>
-                      <tbody className="bg-white divide-y divide-gray-200">
+                      <tbody className="bg-white dark:bg-gray-800 divide-y divide-gray-200 dark:divide-gray-700">
                         {movements.map((movement) => (
-                          <tr key={movement.id}>
-                            <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                          <tr key={movement.id} className="hover:bg-gray-50 dark:hover:bg-gray-700/50 transition-colors">
+                            <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900 dark:text-white">
                               {new Date(movement.movement_date).toLocaleDateString('es-MX')}
                             </td>
                             <td className="px-6 py-4 whitespace-nowrap">
-                              <span className="text-xs font-medium px-2 py-1 rounded-full bg-blue-100 text-blue-800">
+                              <span className="text-xs font-medium px-2 py-1 rounded-full bg-blue-100 text-blue-800 dark:bg-blue-900/30 dark:text-blue-400">
                                 {movement.movement_type}
                               </span>
                             </td>
-                            <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                            <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900 dark:text-white">
                               {movement.products?.name}
                             </td>
-                            <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                            <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900 dark:text-white">
                               {movement.quantity}
                             </td>
-                            <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                            <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-gray-400">
                               {movement.from_location?.name || '-'}
                             </td>
-                            <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                            <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-gray-400">
                               {movement.to_location?.name || '-'}
                             </td>
-                            <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                            <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-gray-400">
                               {movement.user?.first_name} {movement.user?.last_name}
                             </td>
                           </tr>

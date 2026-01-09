@@ -229,17 +229,17 @@ const SupplierModal: React.FC<SupplierModalProps> = ({
       <div className="flex min-h-full items-center justify-center p-4">
         <div className="fixed inset-0 bg-black/30 backdrop-blur-md transition-opacity" />
 
-        <div className="relative transform overflow-hidden rounded-lg bg-white shadow-xl transition-all max-w-4xl w-full">
+        <div className="relative transform overflow-hidden rounded-lg bg-white dark:bg-gray-800 shadow-xl dark:shadow-gray-900/50 transition-all max-w-4xl w-full">
           <form onSubmit={handleSubmit}>
-            <div className="bg-white px-6 py-4 border-b">
+            <div className="bg-white dark:bg-gray-800 px-6 py-4 border-b border-gray-200 dark:border-gray-700">
               <div className="flex items-center justify-between">
-                <h3 className="text-lg font-semibold text-gray-900">
+                <h3 className="text-lg font-semibold text-gray-900 dark:text-white">
                   {supplier ? 'Editar Proveedor' : 'Nuevo Proveedor'}
                 </h3>
                 <button
                   type="button"
                   onClick={onClose}
-                  className="text-gray-400 hover:text-gray-500"
+                  className="text-gray-400 hover:text-gray-500 dark:text-gray-500 dark:hover:text-gray-300 transition-colors"
                 >
                   <XMarkIcon className="h-6 w-6" />
                 </button>
@@ -247,15 +247,15 @@ const SupplierModal: React.FC<SupplierModalProps> = ({
             </div>
 
             {/* Tabs */}
-            <div className="border-b border-gray-200">
+            <div className="border-b border-gray-200 dark:border-gray-700">
               <nav className="-mb-px flex space-x-8 px-6">
                 <button
                   type="button"
                   onClick={() => setActiveTab('basic')}
-                  className={`py-2 px-1 border-b-2 font-medium text-sm ${
+                  className={`py-2 px-1 border-b-2 font-medium text-sm transition-colors ${
                     activeTab === 'basic'
                       ? 'border-[#7cb342] text-[#7cb342]'
-                      : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'
+                      : 'border-transparent text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200 hover:border-gray-300 dark:hover:border-gray-600'
                   }`}
                 >
                   Información Básica
@@ -263,10 +263,10 @@ const SupplierModal: React.FC<SupplierModalProps> = ({
                 <button
                   type="button"
                   onClick={() => setActiveTab('location')}
-                  className={`py-2 px-1 border-b-2 font-medium text-sm ${
+                  className={`py-2 px-1 border-b-2 font-medium text-sm transition-colors ${
                     activeTab === 'location'
                       ? 'border-[#7cb342] text-[#7cb342]'
-                      : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'
+                      : 'border-transparent text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200 hover:border-gray-300 dark:hover:border-gray-600'
                   }`}
                 >
                   Ubicación
@@ -274,10 +274,10 @@ const SupplierModal: React.FC<SupplierModalProps> = ({
                 <button
                   type="button"
                   onClick={() => setActiveTab('contact')}
-                  className={`py-2 px-1 border-b-2 font-medium text-sm ${
+                  className={`py-2 px-1 border-b-2 font-medium text-sm transition-colors ${
                     activeTab === 'contact'
                       ? 'border-[#7cb342] text-[#7cb342]'
-                      : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'
+                      : 'border-transparent text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200 hover:border-gray-300 dark:hover:border-gray-600'
                   }`}
                 >
                   Contacto
@@ -285,10 +285,10 @@ const SupplierModal: React.FC<SupplierModalProps> = ({
                 <button
                   type="button"
                   onClick={() => setActiveTab('financial')}
-                  className={`py-2 px-1 border-b-2 font-medium text-sm ${
+                  className={`py-2 px-1 border-b-2 font-medium text-sm transition-colors ${
                     activeTab === 'financial'
                       ? 'border-[#7cb342] text-[#7cb342]'
-                      : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'
+                      : 'border-transparent text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200 hover:border-gray-300 dark:hover:border-gray-600'
                   }`}
                 >
                   Información Financiera
@@ -301,7 +301,7 @@ const SupplierModal: React.FC<SupplierModalProps> = ({
               {activeTab === 'basic' && (
                 <div className="grid grid-cols-2 gap-4">
                   <div>
-                    <label className="block text-sm font-medium text-gray-700">
+                    <label className="block text-sm font-medium text-gray-700 dark:text-gray-200">
                       Código *
                     </label>
                     <input
@@ -312,18 +312,18 @@ const SupplierModal: React.FC<SupplierModalProps> = ({
                       className={`mt-1 block w-full rounded-md shadow-sm px-3 py-2 ${
                         errors.code
                           ? 'border-red-300 focus:border-red-500 focus:ring-red-500'
-                          : 'border-gray-300 focus:border-[#7cb342] focus:ring-[#7cb342]'
+                          : 'border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:border-[#7cb342] focus:ring-[#7cb342]'
                       }`}
                       placeholder="PROV-001"
                     />
-                    <p className="mt-1 text-xs text-gray-500">Identificador único del proveedor</p>
+                    <p className="mt-1 text-xs text-gray-500 dark:text-gray-400">Identificador único del proveedor</p>
                     {errors.code && (
                       <p className="mt-1 text-sm text-red-600">{errors.code}</p>
                     )}
                   </div>
 
                   <div>
-                    <label className="block text-sm font-medium text-gray-700">
+                    <label className="block text-sm font-medium text-gray-700 dark:text-gray-200">
                       RFC
                     </label>
                     <input
@@ -334,18 +334,18 @@ const SupplierModal: React.FC<SupplierModalProps> = ({
                       className={`mt-1 block w-full rounded-md shadow-sm px-3 py-2 ${
                         errors.rfc
                           ? 'border-red-300 focus:border-red-500 focus:ring-red-500'
-                          : 'border-gray-300 focus:border-[#7cb342] focus:ring-[#7cb342]'
+                          : 'border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:border-[#7cb342] focus:ring-[#7cb342]'
                       }`}
                       placeholder="ABC123456789"
                     />
-                    <p className="mt-1 text-xs text-gray-500">Registro Federal de Contribuyentes (13 caracteres)</p>
+                    <p className="mt-1 text-xs text-gray-500 dark:text-gray-400">Registro Federal de Contribuyentes (13 caracteres)</p>
                     {errors.rfc && (
                       <p className="mt-1 text-sm text-red-600">{errors.rfc}</p>
                     )}
                   </div>
 
                   <div className="col-span-2">
-                    <label className="block text-sm font-medium text-gray-700">
+                    <label className="block text-sm font-medium text-gray-700 dark:text-gray-200">
                       Nombre Comercial *
                     </label>
                     <input
@@ -356,18 +356,18 @@ const SupplierModal: React.FC<SupplierModalProps> = ({
                       className={`mt-1 block w-full rounded-md shadow-sm px-3 py-2 ${
                         errors.name
                           ? 'border-red-300 focus:border-red-500 focus:ring-red-500'
-                          : 'border-gray-300 focus:border-[#7cb342] focus:ring-[#7cb342]'
+                          : 'border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:border-[#7cb342] focus:ring-[#7cb342]'
                       }`}
                       placeholder="Distribuidora de Insumos"
                     />
-                    <p className="mt-1 text-xs text-gray-500">Nombre comercial del proveedor</p>
+                    <p className="mt-1 text-xs text-gray-500 dark:text-gray-400">Nombre comercial del proveedor</p>
                     {errors.name && (
                       <p className="mt-1 text-sm text-red-600">{errors.name}</p>
                     )}
                   </div>
 
                   <div className="col-span-2">
-                    <label className="block text-sm font-medium text-gray-700">
+                    <label className="block text-sm font-medium text-gray-700 dark:text-gray-200">
                       Razón Social
                     </label>
                     <input
@@ -378,12 +378,12 @@ const SupplierModal: React.FC<SupplierModalProps> = ({
                       className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-[#7cb342] focus:ring-[#7cb342] px-3 py-2"
                       placeholder="DISTRIBUIDORA DE INSUMOS NATURALES S.A. DE C.V."
                     />
-                    <p className="mt-1 text-xs text-gray-500">Razón social legal según documentos fiscales (opcional)</p>
+                    <p className="mt-1 text-xs text-gray-500 dark:text-gray-400">Razón social legal según documentos fiscales (opcional)</p>
                   </div>
 
                   {supplier && (
                     <div>
-                      <label className="block text-sm font-medium text-gray-700">
+                      <label className="block text-sm font-medium text-gray-700 dark:text-gray-200">
                         Estado
                       </label>
                       <select
@@ -397,7 +397,7 @@ const SupplierModal: React.FC<SupplierModalProps> = ({
                         <option value={SupplierStatus.SUSPENDED}>Suspendido</option>
                         <option value={SupplierStatus.BLACKLISTED}>Lista Negra</option>
                       </select>
-                      <p className="mt-1 text-xs text-gray-500">Estado operativo del proveedor</p>
+                      <p className="mt-1 text-xs text-gray-500 dark:text-gray-400">Estado operativo del proveedor</p>
                     </div>
                   )}
                 </div>
@@ -407,7 +407,7 @@ const SupplierModal: React.FC<SupplierModalProps> = ({
               {activeTab === 'location' && (
                 <div className="grid grid-cols-2 gap-4">
                   <div>
-                    <label className="block text-sm font-medium text-gray-700">
+                    <label className="block text-sm font-medium text-gray-700 dark:text-gray-200">
                       Calle
                     </label>
                     <input
@@ -418,11 +418,11 @@ const SupplierModal: React.FC<SupplierModalProps> = ({
                       className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-[#7cb342] focus:ring-[#7cb342] px-3 py-2"
                       placeholder="Av. Insurgentes Sur"
                     />
-                    <p className="mt-1 text-xs text-gray-500">Nombre de la calle o avenida</p>
+                    <p className="mt-1 text-xs text-gray-500 dark:text-gray-400">Nombre de la calle o avenida</p>
                   </div>
 
                   <div>
-                    <label className="block text-sm font-medium text-gray-700">
+                    <label className="block text-sm font-medium text-gray-700 dark:text-gray-200">
                       Número
                     </label>
                     <input
@@ -433,11 +433,11 @@ const SupplierModal: React.FC<SupplierModalProps> = ({
                       className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-[#7cb342] focus:ring-[#7cb342] px-3 py-2"
                       placeholder="1234"
                     />
-                    <p className="mt-1 text-xs text-gray-500">Número exterior e interior</p>
+                    <p className="mt-1 text-xs text-gray-500 dark:text-gray-400">Número exterior e interior</p>
                   </div>
 
                   <div>
-                    <label className="block text-sm font-medium text-gray-700">
+                    <label className="block text-sm font-medium text-gray-700 dark:text-gray-200">
                       Colonia
                     </label>
                     <input
@@ -448,11 +448,11 @@ const SupplierModal: React.FC<SupplierModalProps> = ({
                       className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-[#7cb342] focus:ring-[#7cb342] px-3 py-2"
                       placeholder="Del Valle"
                     />
-                    <p className="mt-1 text-xs text-gray-500">Colonia o fraccionamiento</p>
+                    <p className="mt-1 text-xs text-gray-500 dark:text-gray-400">Colonia o fraccionamiento</p>
                   </div>
 
                   <div>
-                    <label className="block text-sm font-medium text-gray-700">
+                    <label className="block text-sm font-medium text-gray-700 dark:text-gray-200">
                       Ciudad
                     </label>
                     <input
@@ -463,11 +463,11 @@ const SupplierModal: React.FC<SupplierModalProps> = ({
                       className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-[#7cb342] focus:ring-[#7cb342] px-3 py-2"
                       placeholder="Guadalajara"
                     />
-                    <p className="mt-1 text-xs text-gray-500">Ciudad o municipio</p>
+                    <p className="mt-1 text-xs text-gray-500 dark:text-gray-400">Ciudad o municipio</p>
                   </div>
 
                   <div>
-                    <label className="block text-sm font-medium text-gray-700">
+                    <label className="block text-sm font-medium text-gray-700 dark:text-gray-200">
                       Estado
                     </label>
                     <input
@@ -478,11 +478,11 @@ const SupplierModal: React.FC<SupplierModalProps> = ({
                       className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-[#7cb342] focus:ring-[#7cb342] px-3 py-2"
                       placeholder="Jalisco"
                     />
-                    <p className="mt-1 text-xs text-gray-500">Estado o provincia</p>
+                    <p className="mt-1 text-xs text-gray-500 dark:text-gray-400">Estado o provincia</p>
                   </div>
 
                   <div>
-                    <label className="block text-sm font-medium text-gray-700">
+                    <label className="block text-sm font-medium text-gray-700 dark:text-gray-200">
                       Código Postal
                     </label>
                     <input
@@ -493,11 +493,11 @@ const SupplierModal: React.FC<SupplierModalProps> = ({
                       className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-[#7cb342] focus:ring-[#7cb342] px-3 py-2"
                       placeholder="44100"
                     />
-                    <p className="mt-1 text-xs text-gray-500">Código postal de 5 dígitos</p>
+                    <p className="mt-1 text-xs text-gray-500 dark:text-gray-400">Código postal de 5 dígitos</p>
                   </div>
 
                   <div>
-                    <label className="block text-sm font-medium text-gray-700">
+                    <label className="block text-sm font-medium text-gray-700 dark:text-gray-200">
                       País
                     </label>
                     <input
@@ -508,7 +508,7 @@ const SupplierModal: React.FC<SupplierModalProps> = ({
                       className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-[#7cb342] focus:ring-[#7cb342] px-3 py-2"
                       placeholder="México"
                     />
-                    <p className="mt-1 text-xs text-gray-500">País donde opera el proveedor</p>
+                    <p className="mt-1 text-xs text-gray-500 dark:text-gray-400">País donde opera el proveedor</p>
                   </div>
                 </div>
               )}
@@ -517,13 +517,13 @@ const SupplierModal: React.FC<SupplierModalProps> = ({
               {activeTab === 'contact' && (
                 <div className="grid grid-cols-2 gap-4">
                   <div className="col-span-2">
-                    <p className="text-sm text-gray-500 mb-4">
+                    <p className="text-sm text-gray-500 dark:text-gray-400 mb-4">
                       Información del contacto principal para comunicaciones comerciales
                     </p>
                   </div>
 
                   <div>
-                    <label className="block text-sm font-medium text-gray-700">
+                    <label className="block text-sm font-medium text-gray-700 dark:text-gray-200">
                       Nombre del Contacto
                     </label>
                     <input
@@ -534,11 +534,11 @@ const SupplierModal: React.FC<SupplierModalProps> = ({
                       className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-[#7cb342] focus:ring-[#7cb342] px-3 py-2"
                       placeholder="Juan Pérez García"
                     />
-                    <p className="mt-1 text-xs text-gray-500">Nombre completo del contacto principal</p>
+                    <p className="mt-1 text-xs text-gray-500 dark:text-gray-400">Nombre completo del contacto principal</p>
                   </div>
 
                   <div>
-                    <label className="block text-sm font-medium text-gray-700">
+                    <label className="block text-sm font-medium text-gray-700 dark:text-gray-200">
                       Cargo
                     </label>
                     <input
@@ -549,11 +549,11 @@ const SupplierModal: React.FC<SupplierModalProps> = ({
                       className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-[#7cb342] focus:ring-[#7cb342] px-3 py-2"
                       placeholder="Gerente de Ventas"
                     />
-                    <p className="mt-1 text-xs text-gray-500">Puesto o cargo del contacto</p>
+                    <p className="mt-1 text-xs text-gray-500 dark:text-gray-400">Puesto o cargo del contacto</p>
                   </div>
 
                   <div>
-                    <label className="block text-sm font-medium text-gray-700">
+                    <label className="block text-sm font-medium text-gray-700 dark:text-gray-200">
                       Teléfono del Contacto
                     </label>
                     <input
@@ -564,11 +564,11 @@ const SupplierModal: React.FC<SupplierModalProps> = ({
                       className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-[#7cb342] focus:ring-[#7cb342] px-3 py-2"
                       placeholder="33-9876-5432"
                     />
-                    <p className="mt-1 text-xs text-gray-500">Teléfono directo del contacto</p>
+                    <p className="mt-1 text-xs text-gray-500 dark:text-gray-400">Teléfono directo del contacto</p>
                   </div>
 
                   <div>
-                    <label className="block text-sm font-medium text-gray-700">
+                    <label className="block text-sm font-medium text-gray-700 dark:text-gray-200">
                       Email del Contacto
                     </label>
                     <input
@@ -579,11 +579,11 @@ const SupplierModal: React.FC<SupplierModalProps> = ({
                       className={`mt-1 block w-full rounded-md shadow-sm px-3 py-2 ${
                         errors.contact_email
                           ? 'border-red-300 focus:border-red-500 focus:ring-red-500'
-                          : 'border-gray-300 focus:border-[#7cb342] focus:ring-[#7cb342]'
+                          : 'border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:border-[#7cb342] focus:ring-[#7cb342]'
                       }`}
                       placeholder="juan.perez@proveedor.com"
                     />
-                    <p className="mt-1 text-xs text-gray-500">Email directo del contacto</p>
+                    <p className="mt-1 text-xs text-gray-500 dark:text-gray-400">Email directo del contacto</p>
                     {errors.contact_email && (
                       <p className="mt-1 text-sm text-red-600">{errors.contact_email}</p>
                     )}
@@ -595,7 +595,7 @@ const SupplierModal: React.FC<SupplierModalProps> = ({
               {activeTab === 'financial' && (
                 <div className="grid grid-cols-2 gap-4">
                   <div>
-                    <label className="block text-sm font-medium text-gray-700">
+                    <label className="block text-sm font-medium text-gray-700 dark:text-gray-200">
                       Términos de Pago
                     </label>
                     <select
@@ -612,11 +612,11 @@ const SupplierModal: React.FC<SupplierModalProps> = ({
                       <option value={PaymentTerms.NET_90}>90 días</option>
                       <option value={PaymentTerms.PREPAID}>Prepago</option>
                     </select>
-                    <p className="mt-1 text-xs text-gray-500">Plazo de pago acordado con el proveedor</p>
+                    <p className="mt-1 text-xs text-gray-500 dark:text-gray-400">Plazo de pago acordado con el proveedor</p>
                   </div>
 
                   <div>
-                    <label className="block text-sm font-medium text-gray-700">
+                    <label className="block text-sm font-medium text-gray-700 dark:text-gray-200">
                       Límite de Crédito
                     </label>
                     <input
@@ -629,11 +629,11 @@ const SupplierModal: React.FC<SupplierModalProps> = ({
                       className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-[#7cb342] focus:ring-[#7cb342] px-3 py-2"
                       placeholder="100000.00"
                     />
-                    <p className="mt-1 text-xs text-gray-500">Monto máximo de crédito acordado</p>
+                    <p className="mt-1 text-xs text-gray-500 dark:text-gray-400">Monto máximo de crédito acordado</p>
                   </div>
 
                   <div>
-                    <label className="block text-sm font-medium text-gray-700">
+                    <label className="block text-sm font-medium text-gray-700 dark:text-gray-200">
                       Moneda
                     </label>
                     <select
@@ -646,11 +646,11 @@ const SupplierModal: React.FC<SupplierModalProps> = ({
                       <option value={Currency.USD}>USD - Dólar Americano</option>
                       <option value={Currency.EUR}>EUR - Euro</option>
                     </select>
-                    <p className="mt-1 text-xs text-gray-500">Moneda en la que se manejan las transacciones</p>
+                    <p className="mt-1 text-xs text-gray-500 dark:text-gray-400">Moneda en la que se manejan las transacciones</p>
                   </div>
 
                   <div>
-                    <label className="block text-sm font-medium text-gray-700">
+                    <label className="block text-sm font-medium text-gray-700 dark:text-gray-200">
                       Cuenta Bancaria
                     </label>
                     <input
@@ -661,11 +661,11 @@ const SupplierModal: React.FC<SupplierModalProps> = ({
                       className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-[#7cb342] focus:ring-[#7cb342] px-3 py-2"
                       placeholder="012180001234567890"
                     />
-                    <p className="mt-1 text-xs text-gray-500">CLABE interbancaria (18 dígitos) o número de cuenta</p>
+                    <p className="mt-1 text-xs text-gray-500 dark:text-gray-400">CLABE interbancaria (18 dígitos) o número de cuenta</p>
                   </div>
 
                   <div>
-                    <label className="block text-sm font-medium text-gray-700">
+                    <label className="block text-sm font-medium text-gray-700 dark:text-gray-200">
                       Lead Time (días)
                     </label>
                     <input
@@ -677,11 +677,11 @@ const SupplierModal: React.FC<SupplierModalProps> = ({
                       className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-[#7cb342] focus:ring-[#7cb342] px-3 py-2"
                       placeholder="15"
                     />
-                    <p className="mt-1 text-xs text-gray-500">Días desde pedido hasta recepción</p>
+                    <p className="mt-1 text-xs text-gray-500 dark:text-gray-400">Días desde pedido hasta recepción</p>
                   </div>
 
                   <div>
-                    <label className="block text-sm font-medium text-gray-700">
+                    <label className="block text-sm font-medium text-gray-700 dark:text-gray-200">
                       Pedido Mínimo
                     </label>
                     <input
@@ -694,23 +694,23 @@ const SupplierModal: React.FC<SupplierModalProps> = ({
                       className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-[#7cb342] focus:ring-[#7cb342] px-3 py-2"
                       placeholder="1000.00"
                     />
-                    <p className="mt-1 text-xs text-gray-500">Monto mínimo de pedido requerido</p>
+                    <p className="mt-1 text-xs text-gray-500 dark:text-gray-400">Monto mínimo de pedido requerido</p>
                   </div>
                 </div>
               )}
             </div>
 
-            <div className="bg-gray-50 px-6 py-3 flex justify-end space-x-3">
+            <div className="bg-gray-50 dark:bg-gray-700/50 px-6 py-3 flex justify-end space-x-3 border-t border-gray-200 dark:border-gray-700">
               <button
                 type="button"
                 onClick={onClose}
-                className="px-4 py-2 border border-gray-300 rounded-md text-sm font-medium text-gray-700 bg-white hover:bg-gray-50"
+                className="px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-md text-sm font-medium text-gray-700 dark:text-gray-200 bg-white dark:bg-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600 transition-colors"
               >
                 Cancelar
               </button>
               <button
                 type="submit"
-                className="px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-[#7cb342] hover:bg-[#689f38]"
+                className="px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-[#7cb342] hover:bg-[#689f38] transition-colors"
               >
                 {supplier ? 'Actualizar' : 'Crear'}
               </button>

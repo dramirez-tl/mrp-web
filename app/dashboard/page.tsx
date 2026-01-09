@@ -42,25 +42,26 @@ function StatCard({
   link?: string;
 }) {
   const colorClasses = {
-    blue: 'bg-blue-100 text-blue-600',
-    green: 'bg-green-100 text-green-600',
-    yellow: 'bg-yellow-100 text-yellow-600',
-    purple: 'bg-purple-100 text-purple-600',
-    red: 'bg-red-100 text-red-600',
-    orange: 'bg-orange-100 text-orange-600',
-  }[color] || 'bg-blue-100 text-blue-600';
+    blue: 'bg-blue-100 text-blue-600 dark:bg-blue-900/30 dark:text-blue-400',
+    green: 'bg-green-100 text-green-600 dark:bg-green-900/30 dark:text-green-400',
+    yellow: 'bg-yellow-100 text-yellow-600 dark:bg-yellow-900/30 dark:text-yellow-400',
+    purple: 'bg-purple-100 text-purple-600 dark:bg-purple-900/30 dark:text-purple-400',
+    red: 'bg-red-100 text-red-600 dark:bg-red-900/30 dark:text-red-400',
+    orange: 'bg-orange-100 text-orange-600 dark:bg-orange-900/30 dark:text-orange-400',
+    gray: 'bg-gray-100 text-gray-600 dark:bg-gray-700 dark:text-gray-400',
+  }[color] || 'bg-blue-100 text-blue-600 dark:bg-blue-900/30 dark:text-blue-400';
 
-  const changeColor = change?.startsWith('+') ? 'text-green-600' :
-                     change?.startsWith('-') ? 'text-red-600' : 'text-gray-600';
+  const changeColor = change?.startsWith('+') ? 'text-green-600 dark:text-green-400' :
+                     change?.startsWith('-') ? 'text-red-600 dark:text-red-400' : 'text-gray-600 dark:text-gray-400';
 
   const content = (
-    <div className="bg-white rounded-lg shadow p-6 hover:shadow-lg transition-shadow">
+    <div className="bg-white dark:bg-gray-800 rounded-lg shadow dark:shadow-gray-900/50 p-6 hover:shadow-lg dark:hover:shadow-gray-900/70 transition-all">
       <div className="flex items-center justify-between">
         <div className="flex-1">
-          <p className="text-sm font-medium text-gray-600">{title}</p>
-          <p className="mt-2 text-3xl font-bold text-gray-900">{value}</p>
+          <p className="text-sm font-medium text-gray-600 dark:text-gray-400">{title}</p>
+          <p className="mt-2 text-3xl font-bold text-gray-900 dark:text-white">{value}</p>
           {subtitle && (
-            <p className="mt-1 text-sm text-gray-500">{subtitle}</p>
+            <p className="mt-1 text-sm text-gray-500 dark:text-gray-400">{subtitle}</p>
           )}
           {change && (
             <div className="flex items-center mt-2">
@@ -231,7 +232,7 @@ export default function DashboardPage() {
           description: `Orden de Producción ${order.order_number} - ${order.status}`,
           time: order.created_at,
           icon: CogIcon,
-          color: 'text-purple-600',
+          color: 'text-purple-600 dark:text-purple-400',
         });
       });
 
@@ -244,7 +245,7 @@ export default function DashboardPage() {
             description: `Orden de Compra ${order.order_number}`,
             time: order.created_at,
             icon: ShoppingCartIcon,
-            color: 'text-blue-600',
+            color: 'text-blue-600 dark:text-blue-400',
           });
         });
       }
@@ -293,7 +294,7 @@ export default function DashboardPage() {
       <ProtectedRoute>
         <DashboardLayout>
           <div className="flex items-center justify-center h-64">
-            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600"></div>
+            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 dark:border-blue-400"></div>
           </div>
         </DashboardLayout>
       </ProtectedRoute>
@@ -306,10 +307,10 @@ export default function DashboardPage() {
         <div className="space-y-6">
           {/* Header */}
           <div>
-            <h1 className="text-2xl font-bold text-gray-900">
+            <h1 className="text-2xl font-bold text-gray-900 dark:text-white">
               Bienvenido, {user?.first_name} {user?.last_name}
             </h1>
-            <p className="text-gray-600">
+            <p className="text-gray-600 dark:text-gray-400">
               Sistema MRP - {new Date().toLocaleDateString('es-MX', {
                 weekday: 'long',
                 year: 'numeric',
@@ -386,25 +387,25 @@ export default function DashboardPage() {
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
             {/* Actividad reciente */}
             <div className="lg:col-span-1">
-              <div className="bg-white rounded-lg shadow">
-                <div className="px-6 py-4 border-b">
-                  <h3 className="text-lg font-semibold text-gray-900">Actividad Reciente</h3>
+              <div className="bg-white dark:bg-gray-800 rounded-lg shadow dark:shadow-gray-900/50 transition-colors">
+                <div className="px-6 py-4 border-b border-gray-200 dark:border-gray-700">
+                  <h3 className="text-lg font-semibold text-gray-900 dark:text-white">Actividad Reciente</h3>
                 </div>
                 <div className="p-6">
                   {recentActivities.length === 0 ? (
-                    <p className="text-sm text-gray-500">No hay actividad reciente</p>
+                    <p className="text-sm text-gray-500 dark:text-gray-400">No hay actividad reciente</p>
                   ) : (
                     <div className="space-y-4">
                       {recentActivities.map((activity) => {
                         const Icon = activity.icon;
                         return (
                           <div key={activity.id} className="flex items-start space-x-3">
-                            <div className={`p-2 rounded-full bg-gray-100`}>
+                            <div className={`p-2 rounded-full bg-gray-100 dark:bg-gray-700`}>
                               <Icon className={`h-4 w-4 ${activity.color}`} />
                             </div>
                             <div className="flex-1">
-                              <p className="text-sm text-gray-900">{activity.description}</p>
-                              <p className="text-xs text-gray-500">{formatDate(activity.time)}</p>
+                              <p className="text-sm text-gray-900 dark:text-white">{activity.description}</p>
+                              <p className="text-xs text-gray-500 dark:text-gray-400">{formatDate(activity.time)}</p>
                             </div>
                           </div>
                         );
@@ -417,62 +418,62 @@ export default function DashboardPage() {
 
             {/* Items con stock bajo */}
             <div className="lg:col-span-2">
-              <div className="bg-white rounded-lg shadow">
-                <div className="px-6 py-4 border-b flex justify-between items-center">
-                  <h3 className="text-lg font-semibold text-gray-900">Productos con Stock Bajo</h3>
-                  <Link href="/inventory" className="text-sm text-blue-600 hover:text-blue-800">
+              <div className="bg-white dark:bg-gray-800 rounded-lg shadow dark:shadow-gray-900/50 transition-colors">
+                <div className="px-6 py-4 border-b border-gray-200 dark:border-gray-700 flex justify-between items-center">
+                  <h3 className="text-lg font-semibold text-gray-900 dark:text-white">Productos con Stock Bajo</h3>
+                  <Link href="/inventory" className="text-sm text-blue-600 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-300 transition-colors">
                     Ver todos →
                   </Link>
                 </div>
                 <div className="p-6">
                   {lowStockItems.length === 0 ? (
-                    <p className="text-sm text-gray-500">No hay productos con stock bajo</p>
+                    <p className="text-sm text-gray-500 dark:text-gray-400">No hay productos con stock bajo</p>
                   ) : (
                     <div className="overflow-x-auto">
                       <table className="min-w-full">
                         <thead>
                           <tr>
-                            <th className="text-left text-xs font-medium text-gray-500 uppercase">Producto</th>
-                            <th className="text-center text-xs font-medium text-gray-500 uppercase">Disponible</th>
-                            <th className="text-center text-xs font-medium text-gray-500 uppercase">Min Stock</th>
-                            <th className="text-center text-xs font-medium text-gray-500 uppercase">Estado</th>
-                            <th className="text-center text-xs font-medium text-gray-500 uppercase">Ubicación</th>
+                            <th className="text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase">Producto</th>
+                            <th className="text-center text-xs font-medium text-gray-500 dark:text-gray-400 uppercase">Disponible</th>
+                            <th className="text-center text-xs font-medium text-gray-500 dark:text-gray-400 uppercase">Min Stock</th>
+                            <th className="text-center text-xs font-medium text-gray-500 dark:text-gray-400 uppercase">Estado</th>
+                            <th className="text-center text-xs font-medium text-gray-500 dark:text-gray-400 uppercase">Ubicación</th>
                           </tr>
                         </thead>
-                        <tbody className="divide-y divide-gray-200">
+                        <tbody className="divide-y divide-gray-200 dark:divide-gray-700">
                           {lowStockItems.map((item: any) => (
                             <tr key={item.id}>
                               <td className="py-2">
                                 <div>
-                                  <p className="text-sm font-medium text-gray-900">
+                                  <p className="text-sm font-medium text-gray-900 dark:text-white">
                                     {item.products?.code}
                                   </p>
-                                  <p className="text-xs text-gray-500">
+                                  <p className="text-xs text-gray-500 dark:text-gray-400">
                                     {item.products?.name}
                                   </p>
                                 </div>
                               </td>
                               <td className="py-2 text-center">
-                                <span className="text-sm font-medium">
+                                <span className="text-sm font-medium text-gray-900 dark:text-white">
                                   {item.available_quantity?.toFixed(2) || '0.00'}
                                 </span>
                               </td>
                               <td className="py-2 text-center">
-                                <span className="text-sm text-gray-600">
+                                <span className="text-sm text-gray-600 dark:text-gray-300">
                                   {item.products?.min_stock || 0}
                                 </span>
                               </td>
                               <td className="py-2 text-center">
                                 <span className={`inline-flex px-2 py-1 text-xs font-semibold rounded-full ${
                                   item.status === 'CRITICAL'
-                                    ? 'bg-red-100 text-red-800'
-                                    : 'bg-yellow-100 text-yellow-800'
+                                    ? 'bg-red-100 text-red-800 dark:bg-red-900/30 dark:text-red-400'
+                                    : 'bg-yellow-100 text-yellow-800 dark:bg-yellow-900/30 dark:text-yellow-400'
                                 }`}>
                                   {item.status === 'CRITICAL' ? 'Crítico' : 'Bajo'}
                                 </span>
                               </td>
                               <td className="py-2 text-center">
-                                <span className="text-xs text-gray-500">
+                                <span className="text-xs text-gray-500 dark:text-gray-400">
                                   {item.inventory_locations?.code || 'N/A'}
                                 </span>
                               </td>
@@ -490,34 +491,34 @@ export default function DashboardPage() {
           {/* Acciones rápidas y estado del sistema */}
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
             {/* Acciones rápidas */}
-            <div className="bg-white rounded-lg shadow">
-              <div className="px-6 py-4 border-b">
-                <h3 className="text-lg font-semibold text-gray-900">Acciones Rápidas</h3>
+            <div className="bg-white dark:bg-gray-800 rounded-lg shadow dark:shadow-gray-900/50 transition-colors">
+              <div className="px-6 py-4 border-b border-gray-200 dark:border-gray-700">
+                <h3 className="text-lg font-semibold text-gray-900 dark:text-white">Acciones Rápidas</h3>
               </div>
               <div className="p-6">
                 <div className="grid grid-cols-2 gap-3">
                   <Link href="/products">
-                    <button className="w-full px-4 py-3 bg-gray-100 text-gray-700 rounded-lg hover:bg-gray-200 text-sm font-medium">
+                    <button className="w-full px-4 py-3 bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-200 rounded-lg hover:bg-gray-200 dark:hover:bg-gray-600 text-sm font-medium transition-colors">
                       + Nuevo Producto
                     </button>
                   </Link>
                   <Link href="/production-orders">
-                    <button className="w-full px-4 py-3 bg-gray-100 text-gray-700 rounded-lg hover:bg-gray-200 text-sm font-medium">
+                    <button className="w-full px-4 py-3 bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-200 rounded-lg hover:bg-gray-200 dark:hover:bg-gray-600 text-sm font-medium transition-colors">
                       + Orden Producción
                     </button>
                   </Link>
                   <Link href="/purchase-orders">
-                    <button className="w-full px-4 py-3 bg-gray-100 text-gray-700 rounded-lg hover:bg-gray-200 text-sm font-medium">
+                    <button className="w-full px-4 py-3 bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-200 rounded-lg hover:bg-gray-200 dark:hover:bg-gray-600 text-sm font-medium transition-colors">
                       + Orden Compra
                     </button>
                   </Link>
                   <Link href="/inventory">
-                    <button className="w-full px-4 py-3 bg-gray-100 text-gray-700 rounded-lg hover:bg-gray-200 text-sm font-medium">
+                    <button className="w-full px-4 py-3 bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-200 rounded-lg hover:bg-gray-200 dark:hover:bg-gray-600 text-sm font-medium transition-colors">
                       Movimiento Inventario
                     </button>
                   </Link>
                   <Link href="/mrp">
-                    <button className="w-full px-4 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 text-sm font-medium col-span-2">
+                    <button className="w-full px-4 py-3 bg-blue-600 dark:bg-blue-500 text-white rounded-lg hover:bg-blue-700 dark:hover:bg-blue-600 text-sm font-medium col-span-2 transition-colors">
                       Ejecutar MRP
                     </button>
                   </Link>
@@ -526,35 +527,35 @@ export default function DashboardPage() {
             </div>
 
             {/* Estado del sistema */}
-            <div className="bg-white rounded-lg shadow">
-              <div className="px-6 py-4 border-b">
-                <h3 className="text-lg font-semibold text-gray-900">Estado del Sistema</h3>
+            <div className="bg-white dark:bg-gray-800 rounded-lg shadow dark:shadow-gray-900/50 transition-colors">
+              <div className="px-6 py-4 border-b border-gray-200 dark:border-gray-700">
+                <h3 className="text-lg font-semibold text-gray-900 dark:text-white">Estado del Sistema</h3>
               </div>
               <div className="p-6">
                 <div className="space-y-3">
                   <div className="flex items-center justify-between">
-                    <span className="text-sm text-gray-600">Base de Datos</span>
-                    <span className="flex items-center text-green-600">
+                    <span className="text-sm text-gray-600 dark:text-gray-400">Base de Datos</span>
+                    <span className="flex items-center text-green-600 dark:text-green-400">
                       <CheckCircleIcon className="h-4 w-4 mr-1" />
                       <span className="text-sm">Operativo</span>
                     </span>
                   </div>
                   <div className="flex items-center justify-between">
-                    <span className="text-sm text-gray-600">API Backend</span>
-                    <span className="flex items-center text-green-600">
+                    <span className="text-sm text-gray-600 dark:text-gray-400">API Backend</span>
+                    <span className="flex items-center text-green-600 dark:text-green-400">
                       <CheckCircleIcon className="h-4 w-4 mr-1" />
                       <span className="text-sm">Operativo</span>
                     </span>
                   </div>
                   <div className="flex items-center justify-between">
-                    <span className="text-sm text-gray-600">Inventario</span>
-                    <span className="flex items-center text-green-600">
+                    <span className="text-sm text-gray-600 dark:text-gray-400">Inventario</span>
+                    <span className="flex items-center text-green-600 dark:text-green-400">
                       <CheckCircleIcon className="h-4 w-4 mr-1" />
                       <span className="text-sm">Sincronizado</span>
                     </span>
                   </div>
-                  <div className="pt-3 border-t">
-                    <p className="text-xs text-gray-500 text-center">
+                  <div className="pt-3 border-t border-gray-200 dark:border-gray-700">
+                    <p className="text-xs text-gray-500 dark:text-gray-400 text-center">
                       Última actualización: {new Date().toLocaleTimeString('es-MX')}
                     </p>
                   </div>

@@ -224,17 +224,17 @@ const ProductModal: React.FC<ProductModalProps> = ({
       <div className="flex min-h-full items-center justify-center p-4">
         <div className="fixed inset-0 bg-black/30 backdrop-blur-md transition-opacity" />
 
-        <div className="relative transform overflow-hidden rounded-lg bg-white shadow-xl transition-all max-w-4xl w-full">
+        <div className="relative transform overflow-hidden rounded-lg bg-white dark:bg-gray-800 shadow-xl dark:shadow-gray-900/50 transition-all max-w-4xl w-full">
           <form onSubmit={handleSubmit}>
-            <div className="bg-white px-6 py-4 border-b">
+            <div className="bg-white dark:bg-gray-800 px-6 py-4 border-b border-gray-200 dark:border-gray-700">
               <div className="flex items-center justify-between">
-                <h3 className="text-lg font-semibold text-gray-900">
+                <h3 className="text-lg font-semibold text-gray-900 dark:text-white">
                   {product ? 'Editar Producto' : 'Nuevo Producto'}
                 </h3>
                 <button
                   type="button"
                   onClick={onClose}
-                  className="text-gray-400 hover:text-gray-500"
+                  className="text-gray-400 hover:text-gray-500 dark:text-gray-500 dark:hover:text-gray-300 transition-colors"
                 >
                   <XMarkIcon className="h-6 w-6" />
                 </button>
@@ -242,15 +242,15 @@ const ProductModal: React.FC<ProductModalProps> = ({
             </div>
 
             {/* Tabs */}
-            <div className="border-b border-gray-200">
+            <div className="border-b border-gray-200 dark:border-gray-700">
               <nav className="-mb-px flex space-x-8 px-6">
                 <button
                   type="button"
                   onClick={() => setActiveTab('basic')}
-                  className={`py-2 px-1 border-b-2 font-medium text-sm ${
+                  className={`py-2 px-1 border-b-2 font-medium text-sm transition-colors ${
                     activeTab === 'basic'
                       ? 'border-[#7cb342] text-[#7cb342]'
-                      : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'
+                      : 'border-transparent text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200 hover:border-gray-300 dark:hover:border-gray-600'
                   }`}
                 >
                   Información Básica
@@ -258,10 +258,10 @@ const ProductModal: React.FC<ProductModalProps> = ({
                 <button
                   type="button"
                   onClick={() => setActiveTab('inventory')}
-                  className={`py-2 px-1 border-b-2 font-medium text-sm ${
+                  className={`py-2 px-1 border-b-2 font-medium text-sm transition-colors ${
                     activeTab === 'inventory'
                       ? 'border-[#7cb342] text-[#7cb342]'
-                      : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'
+                      : 'border-transparent text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200 hover:border-gray-300 dark:hover:border-gray-600'
                   }`}
                 >
                   Inventario y Logística
@@ -269,10 +269,10 @@ const ProductModal: React.FC<ProductModalProps> = ({
                 <button
                   type="button"
                   onClick={() => setActiveTab('quality')}
-                  className={`py-2 px-1 border-b-2 font-medium text-sm ${
+                  className={`py-2 px-1 border-b-2 font-medium text-sm transition-colors ${
                     activeTab === 'quality'
                       ? 'border-[#7cb342] text-[#7cb342]'
-                      : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'
+                      : 'border-transparent text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200 hover:border-gray-300 dark:hover:border-gray-600'
                   }`}
                 >
                   Calidad y Almacenamiento
@@ -285,7 +285,7 @@ const ProductModal: React.FC<ProductModalProps> = ({
               {activeTab === 'basic' && (
                 <div className="grid grid-cols-2 gap-4">
                   <div>
-                    <label className="block text-sm font-medium text-gray-700">
+                    <label className="block text-sm font-medium text-gray-700 dark:text-gray-200">
                       Código *
                     </label>
                     <input
@@ -296,18 +296,18 @@ const ProductModal: React.FC<ProductModalProps> = ({
                       className={`mt-1 block w-full rounded-md shadow-sm px-3 py-2 ${
                         errors.code
                           ? 'border-red-300 focus:border-red-500 focus:ring-red-500'
-                          : 'border-gray-300 focus:border-[#7cb342] focus:ring-[#7cb342]'
+                          : 'border-gray-300 dark:border-gray-600 focus:border-[#7cb342] focus:ring-[#7cb342] bg-white dark:bg-gray-700 text-gray-900 dark:text-white'
                       }`}
                       placeholder="MP694"
                     />
-                    <p className="mt-1 text-xs text-gray-500">Identificador único del producto</p>
+                    <p className="mt-1 text-xs text-gray-500 dark:text-gray-400">Identificador único del producto</p>
                     {errors.code && (
                       <p className="mt-1 text-sm text-red-600">{errors.code}</p>
                     )}
                   </div>
 
                   <div>
-                    <label className="block text-sm font-medium text-gray-700">
+                    <label className="block text-sm font-medium text-gray-700 dark:text-gray-200">
                       Código de Barras
                     </label>
                     <input
@@ -318,11 +318,11 @@ const ProductModal: React.FC<ProductModalProps> = ({
                       className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-[#7cb342] focus:ring-[#7cb342] px-3 py-2"
                       placeholder="7501234567890"
                     />
-                    <p className="mt-1 text-xs text-gray-500">Código de barras EAN/UPC (opcional)</p>
+                    <p className="mt-1 text-xs text-gray-500 dark:text-gray-400">Código de barras EAN/UPC (opcional)</p>
                   </div>
 
                   <div className="col-span-2">
-                    <label className="block text-sm font-medium text-gray-700">
+                    <label className="block text-sm font-medium text-gray-700 dark:text-gray-200">
                       Nombre *
                     </label>
                     <input
@@ -333,18 +333,18 @@ const ProductModal: React.FC<ProductModalProps> = ({
                       className={`mt-1 block w-full rounded-md shadow-sm px-3 py-2 ${
                         errors.name
                           ? 'border-red-300 focus:border-red-500 focus:ring-red-500'
-                          : 'border-gray-300 focus:border-[#7cb342] focus:ring-[#7cb342]'
+                          : 'border-gray-300 dark:border-gray-600 focus:border-[#7cb342] focus:ring-[#7cb342] bg-white dark:bg-gray-700 text-gray-900 dark:text-white'
                       }`}
                       placeholder="CAFÉ SOLUBLE, POLVO"
                     />
-                    <p className="mt-1 text-xs text-gray-500">Nombre descriptivo del producto</p>
+                    <p className="mt-1 text-xs text-gray-500 dark:text-gray-400">Nombre descriptivo del producto</p>
                     {errors.name && (
                       <p className="mt-1 text-sm text-red-600">{errors.name}</p>
                     )}
                   </div>
 
                   <div className="col-span-2">
-                    <label className="block text-sm font-medium text-gray-700">
+                    <label className="block text-sm font-medium text-gray-700 dark:text-gray-200">
                       Descripción
                     </label>
                     <textarea
@@ -355,11 +355,11 @@ const ProductModal: React.FC<ProductModalProps> = ({
                       className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-[#7cb342] focus:ring-[#7cb342] px-3 py-2"
                       placeholder="Café soluble en polvo para fórmulas"
                     />
-                    <p className="mt-1 text-xs text-gray-500">Descripción detallada del producto y sus características</p>
+                    <p className="mt-1 text-xs text-gray-500 dark:text-gray-400">Descripción detallada del producto y sus características</p>
                   </div>
 
                   <div>
-                    <label className="block text-sm font-medium text-gray-700">
+                    <label className="block text-sm font-medium text-gray-700 dark:text-gray-200">
                       Tipo *
                     </label>
                     <select
@@ -372,17 +372,17 @@ const ProductModal: React.FC<ProductModalProps> = ({
                       <option value={ProductType.MP}>Materia Prima</option>
                       <option value={ProductType.ME}>Material de Empaque</option>
                     </select>
-                    <p className="mt-1 text-xs text-gray-500">Clasificación del producto en el sistema</p>
+                    <p className="mt-1 text-xs text-gray-500 dark:text-gray-400">Clasificación del producto en el sistema</p>
                   </div>
 
                   <div className="relative" ref={categoryDropdownRef}>
-                    <label className="block text-sm font-medium text-gray-700">
+                    <label className="block text-sm font-medium text-gray-700 dark:text-gray-200">
                       Categoría
                     </label>
                     <button
                       type="button"
                       onClick={() => setIsCategoryDropdownOpen(!isCategoryDropdownOpen)}
-                      className="mt-1 w-full flex items-center justify-between rounded-md border border-gray-300 shadow-sm px-3 py-2 bg-white text-left focus:outline-none focus:ring-1 focus:ring-[#7cb342] focus:border-[#7cb342]"
+                      className="mt-1 w-full flex items-center justify-between rounded-md border border-gray-300 dark:border-gray-600 shadow-sm px-3 py-2 bg-white dark:bg-gray-700 text-left focus:outline-none focus:ring-1 focus:ring-[#7cb342] focus:border-[#7cb342]"
                     >
                       <div className="flex items-center gap-2 flex-1">
                         {formData.category_id ? (
@@ -403,21 +403,21 @@ const ProductModal: React.FC<ProductModalProps> = ({
                             </span>
                           </>
                         ) : (
-                          <span className="text-gray-500">Sin categoría</span>
+                          <span className="text-gray-500 dark:text-gray-400">Sin categoría</span>
                         )}
                       </div>
                       <ChevronDownIcon className={`h-5 w-5 text-gray-400 transition-transform ${isCategoryDropdownOpen ? 'transform rotate-180' : ''}`} />
                     </button>
 
                     {isCategoryDropdownOpen && (
-                      <div className="absolute z-10 mt-1 w-full bg-white border border-gray-300 rounded-md shadow-lg max-h-60 overflow-auto">
+                      <div className="absolute z-10 mt-1 w-full bg-white dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-md shadow-lg dark:shadow-gray-900/50 max-h-60 overflow-auto">
                         <button
                           type="button"
                           onClick={() => {
                             setFormData((prev: any) => ({ ...prev, category_id: '' }));
                             setIsCategoryDropdownOpen(false);
                           }}
-                          className="w-full px-3 py-2 text-left hover:bg-gray-50 text-gray-500 text-sm"
+                          className="w-full px-3 py-2 text-left hover:bg-gray-50 dark:hover:bg-gray-600 text-gray-500 dark:text-gray-400 text-sm transition-colors"
                         >
                           Sin categoría
                         </button>
@@ -429,7 +429,7 @@ const ProductModal: React.FC<ProductModalProps> = ({
                               setFormData((prev: any) => ({ ...prev, category_id: category.id }));
                               setIsCategoryDropdownOpen(false);
                             }}
-                            className="w-full px-3 py-2 text-left hover:bg-gray-50 flex items-center gap-2"
+                            className="w-full px-3 py-2 text-left hover:bg-gray-50 dark:hover:bg-gray-600 flex items-center gap-2 transition-colors"
                           >
                             {category.icon && (
                               <span className="text-base">{category.icon}</span>
@@ -447,11 +447,11 @@ const ProductModal: React.FC<ProductModalProps> = ({
                         ))}
                       </div>
                     )}
-                    <p className="mt-1 text-xs text-gray-500">Categoría para organizar el producto</p>
+                    <p className="mt-1 text-xs text-gray-500 dark:text-gray-400">Categoría para organizar el producto</p>
                   </div>
 
                   <div>
-                    <label className="block text-sm font-medium text-gray-700">
+                    <label className="block text-sm font-medium text-gray-700 dark:text-gray-200">
                       Presentación
                     </label>
                     <select
@@ -469,12 +469,12 @@ const ProductModal: React.FC<ProductModalProps> = ({
                       <option value={ProductPresentation.INJECTION}>Inyección</option>
                       <option value={ProductPresentation.OTHER}>Otro</option>
                     </select>
-                    <p className="mt-1 text-xs text-gray-500">Forma física del producto</p>
+                    <p className="mt-1 text-xs text-gray-500 dark:text-gray-400">Forma física del producto</p>
                   </div>
 
                   {product && (
                     <div>
-                      <label className="block text-sm font-medium text-gray-700">
+                      <label className="block text-sm font-medium text-gray-700 dark:text-gray-200">
                         Estado
                       </label>
                       <select
@@ -487,12 +487,12 @@ const ProductModal: React.FC<ProductModalProps> = ({
                         <option value={ProductStatus.INACTIVE}>Inactivo</option>
                         <option value={ProductStatus.DISCONTINUED}>Descontinuado</option>
                       </select>
-                      <p className="mt-1 text-xs text-gray-500">Estado actual del producto</p>
+                      <p className="mt-1 text-xs text-gray-500 dark:text-gray-400">Estado actual del producto</p>
                     </div>
                   )}
 
                   <div>
-                    <label className="block text-sm font-medium text-gray-700">
+                    <label className="block text-sm font-medium text-gray-700 dark:text-gray-200">
                       Unidad de Compra *
                     </label>
                     <select
@@ -502,7 +502,7 @@ const ProductModal: React.FC<ProductModalProps> = ({
                       className={`mt-1 block w-full rounded-md shadow-sm px-3 py-2 ${
                         errors.purchase_unit
                           ? 'border-red-300 focus:border-red-500 focus:ring-red-500'
-                          : 'border-gray-300 focus:border-[#7cb342] focus:ring-[#7cb342]'
+                          : 'border-gray-300 dark:border-gray-600 focus:border-[#7cb342] focus:ring-[#7cb342] bg-white dark:bg-gray-700 text-gray-900 dark:text-white'
                       }`}
                     >
                       <optgroup label="Peso">
@@ -534,14 +534,14 @@ const ProductModal: React.FC<ProductModalProps> = ({
                         <option value={UnitMeasure.ROLL}>Rollo (ROLL)</option>
                       </optgroup>
                     </select>
-                    <p className="mt-1 text-xs text-gray-500">Unidad en la que compras el producto al proveedor</p>
+                    <p className="mt-1 text-xs text-gray-500 dark:text-gray-400">Unidad en la que compras el producto al proveedor</p>
                     {errors.purchase_unit && (
                       <p className="mt-1 text-sm text-red-600">{errors.purchase_unit}</p>
                     )}
                   </div>
 
                   <div>
-                    <label className="block text-sm font-medium text-gray-700">
+                    <label className="block text-sm font-medium text-gray-700 dark:text-gray-200">
                       Unidad de Inventario *
                     </label>
                     <select
@@ -551,7 +551,7 @@ const ProductModal: React.FC<ProductModalProps> = ({
                       className={`mt-1 block w-full rounded-md shadow-sm px-3 py-2 ${
                         errors.inventory_unit
                           ? 'border-red-300 focus:border-red-500 focus:ring-red-500'
-                          : 'border-gray-300 focus:border-[#7cb342] focus:ring-[#7cb342]'
+                          : 'border-gray-300 dark:border-gray-600 focus:border-[#7cb342] focus:ring-[#7cb342] bg-white dark:bg-gray-700 text-gray-900 dark:text-white'
                       }`}
                     >
                       <optgroup label="Peso">
@@ -583,14 +583,14 @@ const ProductModal: React.FC<ProductModalProps> = ({
                         <option value={UnitMeasure.ROLL}>Rollo (ROLL)</option>
                       </optgroup>
                     </select>
-                    <p className="mt-1 text-xs text-gray-500">Unidad en la que controlas el inventario interno</p>
+                    <p className="mt-1 text-xs text-gray-500 dark:text-gray-400">Unidad en la que controlas el inventario interno</p>
                     {errors.inventory_unit && (
                       <p className="mt-1 text-sm text-red-600">{errors.inventory_unit}</p>
                     )}
                   </div>
 
                   <div className="col-span-2">
-                    <label className="block text-sm font-medium text-gray-700">
+                    <label className="block text-sm font-medium text-gray-700 dark:text-gray-200">
                       Factor de Conversión *
                     </label>
                     <input
@@ -603,11 +603,11 @@ const ProductModal: React.FC<ProductModalProps> = ({
                       className={`mt-1 block w-full rounded-md shadow-sm px-3 py-2 ${
                         errors.conversion_factor
                           ? 'border-red-300 focus:border-red-500 focus:ring-red-500'
-                          : 'border-gray-300 focus:border-[#7cb342] focus:ring-[#7cb342]'
+                          : 'border-gray-300 dark:border-gray-600 focus:border-[#7cb342] focus:ring-[#7cb342] bg-white dark:bg-gray-700 text-gray-900 dark:text-white'
                       }`}
                       placeholder="1000"
                     />
-                    <p className="mt-1 text-xs text-gray-500">
+                    <p className="mt-1 text-xs text-gray-500 dark:text-gray-400">
                       Cuántas unidades de inventario hay en 1 unidad de compra. Ejemplo: 1 KG = 1000 G, el factor es 1000
                     </p>
                     {errors.conversion_factor && (
@@ -622,7 +622,7 @@ const ProductModal: React.FC<ProductModalProps> = ({
                 <div className="space-y-4">
                   <div className="grid grid-cols-2 gap-4">
                     <div>
-                      <label className="block text-sm font-medium text-gray-700">
+                      <label className="block text-sm font-medium text-gray-700 dark:text-gray-200">
                         Peso Unitario
                       </label>
                       <input
@@ -635,11 +635,11 @@ const ProductModal: React.FC<ProductModalProps> = ({
                         className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-[#7cb342] focus:ring-[#7cb342] px-3 py-2"
                         placeholder="0.270"
                       />
-                      <p className="mt-1 text-xs text-gray-500">Peso por unidad en kg</p>
+                      <p className="mt-1 text-xs text-gray-500 dark:text-gray-400">Peso por unidad en kg</p>
                     </div>
 
                     <div>
-                      <label className="block text-sm font-medium text-gray-700">
+                      <label className="block text-sm font-medium text-gray-700 dark:text-gray-200">
                         Volumen Unitario
                       </label>
                       <input
@@ -652,11 +652,11 @@ const ProductModal: React.FC<ProductModalProps> = ({
                         className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-[#7cb342] focus:ring-[#7cb342] px-3 py-2"
                         placeholder="0.250"
                       />
-                      <p className="mt-1 text-xs text-gray-500">Volumen por unidad en litros</p>
+                      <p className="mt-1 text-xs text-gray-500 dark:text-gray-400">Volumen por unidad en litros</p>
                     </div>
 
                     <div>
-                      <label className="block text-sm font-medium text-gray-700">
+                      <label className="block text-sm font-medium text-gray-700 dark:text-gray-200">
                         Unidades por Paquete
                       </label>
                       <input
@@ -668,11 +668,11 @@ const ProductModal: React.FC<ProductModalProps> = ({
                         className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-[#7cb342] focus:ring-[#7cb342] px-3 py-2"
                         placeholder="12"
                       />
-                      <p className="mt-1 text-xs text-gray-500">Cantidad de unidades por empaque</p>
+                      <p className="mt-1 text-xs text-gray-500 dark:text-gray-400">Cantidad de unidades por empaque</p>
                     </div>
 
                     <div>
-                      <label className="block text-sm font-medium text-gray-700">
+                      <label className="block text-sm font-medium text-gray-700 dark:text-gray-200">
                         Lead Time (días)
                       </label>
                       <input
@@ -684,15 +684,15 @@ const ProductModal: React.FC<ProductModalProps> = ({
                         className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-[#7cb342] focus:ring-[#7cb342] px-3 py-2"
                         placeholder="15"
                       />
-                      <p className="mt-1 text-xs text-gray-500">Días desde pedido hasta recepción</p>
+                      <p className="mt-1 text-xs text-gray-500 dark:text-gray-400">Días desde pedido hasta recepción</p>
                     </div>
                   </div>
 
-                  <div className="border-t pt-4">
-                    <h4 className="text-sm font-medium text-gray-700 mb-4">Niveles de Inventario</h4>
+                  <div className="border-t border-gray-200 dark:border-gray-700 pt-4">
+                    <h4 className="text-sm font-medium text-gray-700 dark:text-gray-200 mb-4">Niveles de Inventario</h4>
                     <div className="grid grid-cols-2 gap-4">
                       <div>
-                        <label className="block text-sm font-medium text-gray-700">
+                        <label className="block text-sm font-medium text-gray-700 dark:text-gray-200">
                           Stock Mínimo
                         </label>
                         <input
@@ -704,18 +704,18 @@ const ProductModal: React.FC<ProductModalProps> = ({
                           className={`mt-1 block w-full rounded-md shadow-sm px-3 py-2 ${
                             errors.min_stock
                               ? 'border-red-300 focus:border-red-500 focus:ring-red-500'
-                              : 'border-gray-300 focus:border-[#7cb342] focus:ring-[#7cb342]'
+                              : 'border-gray-300 dark:border-gray-600 focus:border-[#7cb342] focus:ring-[#7cb342] bg-white dark:bg-gray-700 text-gray-900 dark:text-white'
                           }`}
                           placeholder="1000"
                         />
-                        <p className="mt-1 text-xs text-gray-500">Nivel mínimo permitido en inventario</p>
+                        <p className="mt-1 text-xs text-gray-500 dark:text-gray-400">Nivel mínimo permitido en inventario</p>
                         {errors.min_stock && (
                           <p className="mt-1 text-sm text-red-600">{errors.min_stock}</p>
                         )}
                       </div>
 
                       <div>
-                        <label className="block text-sm font-medium text-gray-700">
+                        <label className="block text-sm font-medium text-gray-700 dark:text-gray-200">
                           Stock Máximo
                         </label>
                         <input
@@ -727,11 +727,11 @@ const ProductModal: React.FC<ProductModalProps> = ({
                           className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-[#7cb342] focus:ring-[#7cb342] px-3 py-2"
                           placeholder="10000"
                         />
-                        <p className="mt-1 text-xs text-gray-500">Nivel máximo deseado en inventario</p>
+                        <p className="mt-1 text-xs text-gray-500 dark:text-gray-400">Nivel máximo deseado en inventario</p>
                       </div>
 
                       <div>
-                        <label className="block text-sm font-medium text-gray-700">
+                        <label className="block text-sm font-medium text-gray-700 dark:text-gray-200">
                           Punto de Reorden
                         </label>
                         <input
@@ -743,11 +743,11 @@ const ProductModal: React.FC<ProductModalProps> = ({
                           className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-[#7cb342] focus:ring-[#7cb342] px-3 py-2"
                           placeholder="5000"
                         />
-                        <p className="mt-1 text-xs text-gray-500">Nivel que activa una nueva compra</p>
+                        <p className="mt-1 text-xs text-gray-500 dark:text-gray-400">Nivel que activa una nueva compra</p>
                       </div>
 
                       <div>
-                        <label className="block text-sm font-medium text-gray-700">
+                        <label className="block text-sm font-medium text-gray-700 dark:text-gray-200">
                           Stock de Seguridad
                         </label>
                         <input
@@ -759,7 +759,7 @@ const ProductModal: React.FC<ProductModalProps> = ({
                           className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-[#7cb342] focus:ring-[#7cb342] px-3 py-2"
                           placeholder="2000"
                         />
-                        <p className="mt-1 text-xs text-gray-500">Stock de reserva para imprevistos</p>
+                        <p className="mt-1 text-xs text-gray-500 dark:text-gray-400">Stock de reserva para imprevistos</p>
                       </div>
                     </div>
                   </div>
@@ -772,7 +772,7 @@ const ProductModal: React.FC<ProductModalProps> = ({
                 <div className="space-y-4">
                   <div className="grid grid-cols-2 gap-4">
                     <div>
-                      <label className="block text-sm font-medium text-gray-700">
+                      <label className="block text-sm font-medium text-gray-700 dark:text-gray-200">
                         Vida Útil (días)
                       </label>
                       <input
@@ -784,11 +784,11 @@ const ProductModal: React.FC<ProductModalProps> = ({
                         className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-[#7cb342] focus:ring-[#7cb342] px-3 py-2"
                         placeholder="365"
                       />
-                      <p className="mt-1 text-xs text-gray-500">Días de duración desde fabricación</p>
+                      <p className="mt-1 text-xs text-gray-500 dark:text-gray-400">Días de duración desde fabricación</p>
                     </div>
 
                     <div>
-                      <label className="block text-sm font-medium text-gray-700">
+                      <label className="block text-sm font-medium text-gray-700 dark:text-gray-200">
                         Días de Cuarentena
                       </label>
                       <input
@@ -800,12 +800,12 @@ const ProductModal: React.FC<ProductModalProps> = ({
                         className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-[#7cb342] focus:ring-[#7cb342] px-3 py-2"
                         placeholder="7"
                       />
-                      <p className="mt-1 text-xs text-gray-500">Días de retención antes de liberar</p>
+                      <p className="mt-1 text-xs text-gray-500 dark:text-gray-400">Días de retención antes de liberar</p>
                     </div>
                   </div>
 
-                  <div className="border-t pt-4">
-                    <h4 className="text-sm font-medium text-gray-700 mb-4">Control de Calidad</h4>
+                  <div className="border-t border-gray-200 dark:border-gray-700 pt-4">
+                    <h4 className="text-sm font-medium text-gray-700 dark:text-gray-200 mb-4">Control de Calidad</h4>
                     <div className="space-y-4">
                       <label className="flex items-center">
                         <input
@@ -815,12 +815,12 @@ const ProductModal: React.FC<ProductModalProps> = ({
                           onChange={handleChange}
                           className="rounded border-gray-300 text-[#7cb342] focus:ring-[#7cb342]"
                         />
-                        <span className="ml-2 text-sm text-gray-700">Requiere Control de Calidad</span>
+                        <span className="ml-2 text-sm text-gray-700 dark:text-gray-200">Requiere Control de Calidad</span>
                       </label>
 
                       {formData.requires_quality_control && (
                         <div>
-                          <label className="block text-sm font-medium text-gray-700">
+                          <label className="block text-sm font-medium text-gray-700 dark:text-gray-200">
                             Plan de Muestreo
                           </label>
                           <textarea
@@ -831,7 +831,7 @@ const ProductModal: React.FC<ProductModalProps> = ({
                             className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-[#7cb342] focus:ring-[#7cb342] px-3 py-2"
                             placeholder="Ej: Muestreo de 3 unidades cada lote de 1000"
                           />
-                          <p className="mt-1 text-xs text-gray-500">Describe cómo se realizará el control de calidad</p>
+                          <p className="mt-1 text-xs text-gray-500 dark:text-gray-400">Describe cómo se realizará el control de calidad</p>
                         </div>
                       )}
                     </div>
@@ -840,17 +840,17 @@ const ProductModal: React.FC<ProductModalProps> = ({
               )}
             </div>
 
-            <div className="bg-gray-50 px-6 py-3 flex justify-end space-x-3">
+            <div className="bg-gray-50 dark:bg-gray-700/50 px-6 py-3 flex justify-end space-x-3 border-t border-gray-200 dark:border-gray-700">
               <button
                 type="button"
                 onClick={onClose}
-                className="px-4 py-2 border border-gray-300 rounded-md text-sm font-medium text-gray-700 bg-white hover:bg-gray-50"
+                className="px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-md text-sm font-medium text-gray-700 dark:text-gray-200 bg-white dark:bg-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600 transition-colors"
               >
                 Cancelar
               </button>
               <button
                 type="submit"
-                className="px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-[#7cb342] hover:bg-[#689f38]"
+                className="px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-[#7cb342] hover:bg-[#689f38] transition-colors"
               >
                 {product ? 'Actualizar' : 'Crear'}
               </button>
